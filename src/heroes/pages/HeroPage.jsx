@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useMemo } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 
 import { getHeroeById } from "../helpers";
@@ -6,19 +8,28 @@ export const HeroPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const hero = getHeroeById(id);
+    // execute the function only when the id changes
+    // not every time the component is rendered
+    const hero = useMemo( () => getHeroeById(id), [id] );
+    
+    const [animation, setAnimation] = useState("animate__animated animate__fadeIn")
 
     const onNavigateBack = () => {
         const path = hero.publisher === "Marvel Comics" ? "/marvel" : "/dc";
-        navigate(path);
+        setAnimation("animate__animated animate__fadeOutRight");
+        setTimeout(() => {
+            navigate(path);
+        }, 1000);
+        
     };
+
 
 
     if (!hero) return <Navigate to="/" />;
 
 
     return (
-        <div className="row mt-5">
+        <div className={`row mt-5 ${animation}`}>
             <div className="col-4">
                 <img
                     src={`/assets/heroes/${id}.jpg`}
