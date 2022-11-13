@@ -15,10 +15,10 @@ export const HeroPage = () => {
     const [animation, setAnimation] = useState("animate__animated animate__fadeIn")
 
     const onNavigateBack = () => {
-        const path = hero.publisher === "Marvel Comics" ? "/marvel" : "/dc";
+        
         setAnimation("animate__animated animate__fadeOutRight");
         setTimeout(() => {
-            navigate(path);
+            navigate(-1);
         }, 1000);
         
     };

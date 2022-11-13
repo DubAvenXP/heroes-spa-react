@@ -50,7 +50,7 @@ export const HeroCard = ({
                                 </small>
                             </p>
 
-                            <Link to={`/hero/${id}`}>Más...</Link>
+                            <Link to={`/hero/${id}`}>More...</Link>
                         </div>
                     </div>
                 </div>
